@@ -104,7 +104,7 @@ y += 40
 
 # --- griglia colonne
 BAR_X0, BAR_W = MARGIN, 7
-PLAT_X0, PLAT_X1 = 82, 262
+PLAT_X0, PLAT_X1 = MARGIN, 262
 C2_X0,  C2_X1   = 274, 646
 C3_X0,  C3_X1   = 658, W - MARGIN
 
@@ -140,9 +140,6 @@ for size in range(23, 14, -1):
 f_plat = font(F_BOLD, 21)
 row_y = ROWS_TOP
 for (plat, _, _), (l2, l3), rh in zip(ROWS, wrapped, heights):
-    # accento giallo
-    draw.rounded_rectangle([(BAR_X0, row_y), (BAR_X0 + BAR_W, row_y + rh)],
-                           radius=3, fill=GIALLO)
     # box piattaforma
     draw.rounded_rectangle([(PLAT_X0, row_y), (PLAT_X1, row_y + rh)],
                            radius=10, fill=BLU_DARK)
