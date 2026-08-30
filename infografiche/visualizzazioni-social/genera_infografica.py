@@ -68,7 +68,7 @@ def load_icon(slug, size, colore):
 # ---------------------------------------------------------------- contenuti
 EYEBROW = "SOCIAL NETWORK:"
 TITOLO  = ["Quando viene contata", "una visualizzazione?"]
-HEAD    = ["VIEW DEL CONTENUTO", "VIEW VIDEO"]
+HEAD    = ["VIEW CONTENUTO", "VIEW VIDEO"]
 
 # I loghi sostituiscono i nomi delle piattaforme.
 # Colori ufficiali usati solo nella variante "colore".
