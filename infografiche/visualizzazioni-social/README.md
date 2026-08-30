@@ -19,22 +19,38 @@ Elementi di brand: eyebrow gialla spaziata, regola gialla sotto il titolo,
 barra di accento gialla su ogni riga, intestazioni di colonna gialle,
 nota finale con barra gialla, footer con logotipo e `www.veronicagentili.com`.
 
+## Loghi delle piattaforme
+
+I nomi delle piattaforme sono sostituiti dai loghi ufficiali. Gli SVG sono in
+`icons/` e arrivano da [Simple Icons](https://simpleicons.org) (licenza CC0);
+i marchi restano dei rispettivi proprietari, qui usati a scopo informativo.
+
+Due varianti:
+
+- `vg_visualizzazioni_social_brandizzata.png` — loghi bianchi monocromatici (default)
+- `vg_visualizzazioni_social_brandizzata_colore.png` — loghi nei colori ufficiali
+
+Si sceglie con `VG_VARIANTE=bianco|colore`. Nella variante a colori X resta
+bianco: il nero del marchio sparirebbe sul fondo blu.
+
 ## Come rigenerare
 
 I font Poppins non sono versionati. Metterli in `fonts/` oppure puntare
 `VG_FONT_DIR` a una cartella che li contiene:
 
 ```bash
-pip install pillow
+pip install pillow cairosvg
 mkdir -p fonts
 for f in Poppins-Bold Poppins-SemiBold Poppins-Medium Poppins-Regular Poppins-Light; do
   curl -sSL -o "fonts/$f.ttf" \
     "https://raw.githubusercontent.com/google/fonts/main/ofl/poppins/$f.ttf"
 done
-python3 genera_infografica.py
+python3 genera_infografica.py                 # loghi bianchi
+VG_VARIANTE=colore python3 genera_infografica.py   # loghi a colori
 ```
 
-Il testo delle righe si modifica nella lista `ROWS`; altezza righe e corpo del
+Il testo delle righe si modifica nella lista `ROWS` (il primo campo e' lo
+slug del logo, che deve corrispondere a un file in `icons/`); altezza righe e corpo del
 testo si adattano da soli allo spazio disponibile.
 
 ## Nota sul logo
