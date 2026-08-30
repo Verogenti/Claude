@@ -53,8 +53,8 @@ righe = []
 for slug, c2, c3 in ROWS:
     righe.append(
         f'      <div class="cella-logo">{icona(slug)}</div>\n'
-        f'      <div class="cella">{c2}</div>\n'
-        f'      <div class="cella">{c3}</div>'
+        f'      <div class="cella"><p>{c2}</p></div>\n'
+        f'      <div class="cella"><p>{c3}</p></div>'
     )
 
 html = f"""<!doctype html>
@@ -86,8 +86,11 @@ html = f"""<!doctype html>
   .logo {{ width: 54px; height: 54px; }}
   .cella {{
     background: #1E376E; border-radius: 10px; padding: 18px 22px;
-    font-weight: 400; font-size: 20px; line-height: 29px;
     display: flex; align-items: center;
+  }}
+  .cella p {{
+    margin: 0; width: 100%;
+    font-weight: 400; font-size: 20px; line-height: 29px; text-align: left;
   }}
   .nota {{ display: flex; gap: 27px; margin-top: 38px; }}
   .nota-barra {{ width: 7px; background: #F5C518; border-radius: 3px; flex: none; }}
