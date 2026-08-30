@@ -168,9 +168,7 @@ for size in range(23, 14, -1):
 
 row_y = ROWS_TOP
 for (slug, _, _), (l2, l3), rh in zip(ROWS, wrapped, heights):
-    # box piattaforma con logo centrato
-    draw.rounded_rectangle([(PLAT_X0, row_y), (PLAT_X1, row_y + rh)],
-                           radius=10, fill=BLU_DARK)
+    # logo centrato sul fondo, senza box
     colore = COLORI_BRAND[slug] if VARIANTE == "colore" else "#FFFFFF"
     icona = load_icon(slug, ICON_SIZE, colore)
     img.paste(icona,
