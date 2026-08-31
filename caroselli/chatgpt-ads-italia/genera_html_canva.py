@@ -71,6 +71,8 @@ def titolo_soggetto(testo, size):
 
 
 def bullet_lista(items, top, size=34):
+    """Elenco costruito con div e non con <ul>: all'import Canva aggiungerebbe
+    i propri marcatori di lista e disallineerebbe i pallini gialli."""
     lh = int(size * 1.42)
     gap = max(22, size // 2 + 8)
     r = size // 3 + 3
@@ -79,13 +81,13 @@ def bullet_lista(items, top, size=34):
     for i, t in enumerate(items):
         mt = 0 if i == 0 else gap
         righe.append(
-            f'    <li style="margin-top:{mt}px">'
-            f'<span class="pallino" style="width:{r * 2}px;height:{r * 2}px;'
-            f'margin-top:{lh // 2 - r}px;font-size:{freccia}px">&gt;</span>'
-            f'<span class="voce">{esc(t)}</span></li>')
-    return (f'  <ul class="bullet" style="top:{top}px;left:{BULLET_X + 4}px;'
+            f'    <div class="riga" style="margin-top:{mt}px">'
+            f'<div class="pallino" style="width:{r * 2}px;height:{r * 2}px;'
+            f'top:{lh // 2 - r}px;line-height:{r * 2}px;font-size:{freccia}px">&gt;</div>'
+            f'<div class="voce">{esc(t)}</div></div>')
+    return (f'  <div class="bullet" style="top:{top}px;left:{BULLET_X + 4}px;'
             f'font-size:{size}px;line-height:{lh}px">\n'
-            + "\n".join(righe) + "\n  </ul>")
+            + "\n".join(righe) + "\n  </div>")
 
 
 def nota_gialla(testo, size=32):
@@ -209,12 +211,11 @@ html = f"""<!doctype html>
   .testo p {{ font-weight: 400; font-size: 46px; line-height: 69px; margin: 0 0 41px; }}
   .testo p.chiusura {{ font-weight: 500; font-size: 50px; line-height: 70px; color: #F5C518; margin: 13px 0 0; }}
 
-  .bullet {{ position: absolute; margin: 0; padding: 0; list-style: none; width: 492px; font-weight: 400; }}
-  .bullet li {{ display: flex; align-items: flex-start; gap: 14px; }}
+  .bullet {{ position: absolute; width: 492px; font-weight: 400; }}
+  .riga {{ position: relative; padding-left: 42px; }}
   .pallino {{
-    flex: none; background: #F5C518; color: #1E3A6E; border-radius: 50%;
-    font-weight: 700; line-height: 1; display: flex;
-    align-items: center; justify-content: center;
+    position: absolute; left: 0; background: #F5C518; color: #1E3A6E;
+    border-radius: 50%; font-weight: 700; text-align: center;
   }}
   .voce {{ width: 450px; }}
 
