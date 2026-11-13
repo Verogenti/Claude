@@ -7,7 +7,9 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 FONT_DIR = os.environ.get("VG_FONT_DIR", os.path.join(BASE, "fonts"))
 F_BOLD, F_SEMI, F_MED, F_REG, F_LIGHT = (f"{FONT_DIR}/Poppins-{n}.ttf" for n in
                                          ("Bold", "SemiBold", "Medium", "Regular", "Light"))
-W, H, MARGIN = 1080, 1350, 64
+FORMATO = os.environ.get("VG_FORMATO", "orizzontale")  # orizzontale (16:9, come Meta) | verticale (4:5)
+W, H = (1920, 1080) if FORMATO == "orizzontale" else (1080, 1350)
+MARGIN = 64
 FOOTER_Y = H - 52
 BLU, BOX, CARD, GIALLO, BIANCO = (53, 90, 158), (30, 55, 110), (44, 76, 138), (245, 197, 24), (255, 255, 255)
 GAP, R = 12, 10
@@ -64,11 +66,12 @@ COLW = (W - 2 * MARGIN - 4 * GAP) // 5
 PAD = 12
 
 # --- titolo + sottotitolo centrati
-for ts in range(100, 40, -2):
+TMAX = 84 if FORMATO == "orizzontale" else 100
+for ts in range(TMAX, 40, -2):
     if d.textlength(TITOLO, font=F(F_BOLD, ts)) <= W - 2 * MARGIN: break
-y = 60
+y = 48 if FORMATO == "orizzontale" else 60
 d.text((W // 2, y), TITOLO, font=F(F_BOLD, ts), fill=BIANCO, anchor="mt"); y += int(ts * 1.15)
-d.text((W // 2, y), SOTTOTITOLO, font=F(F_BOLD, 54), fill=GIALLO, anchor="mt"); y += int(54 * 1.3) + 34
+d.text((W // 2, y), SOTTOTITOLO, font=F(F_BOLD, 54), fill=GIALLO, anchor="mt"); y += int(54 * 1.3) + (24 if FORMATO == "orizzontale" else 34)
 
 f_fonte = F(F_LIGHT, 20)
 FONTE_Y = FOOTER_Y - 56
@@ -91,7 +94,7 @@ def misura(s):
         hl = max(hl, h)
     return hh, hd, hl
 
-for s in range(24, 12, -1):
+for s in range(32, 12, -1):
     hh, hd, hl = misura(s)
     if y + hh + hd + GAP + hl <= LIST_BOTTOM: break
 print("corpo", s)
@@ -139,5 +142,5 @@ for word, col in (("VERONICA", BIANCO), ("GENTILI", GIALLO)):
     x += 12
 d.text((W - MARGIN, FOOTER_Y), "www.veronicagentili.com", font=F(F_LIGHT, 24), fill=BIANCO, anchor="rm")
 
-out = os.path.join(BASE, "20261113_creative_diversification_cheat_sheet.png")
+out = os.path.join(BASE, f"20261113_creative_diversification_cheat_sheet_{FORMATO}.png")
 img.save(out, "PNG"); print(out)
